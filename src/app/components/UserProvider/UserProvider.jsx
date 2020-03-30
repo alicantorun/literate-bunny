@@ -1,0 +1,51 @@
+import React, { useContext, createContext, useReducer } from "react";
+const UserContext = createContext();
+
+export function useUserContext() {
+  return useContext(UserContext);
+}
+
+export const withAuthorization = condition => Child => {
+  return function WithAuthorization(props) {
+    const { userState } = useUserContext();
+    return condition(userState) ? (
+      <Child {...props} />
+    ) : (
+      <Child {...props} unAuthorized />
+    );
+  };
+};
+
+const initialState = {
+  user: null,
+  isAuthenticated: false,
+  score: 0
+};
+
+export default function UserProvider(props) {
+  const [userState, setUserState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    initialState
+  );
+
+  const login = name => {
+    setUserState({ isAuthenticated: true, user: name });
+  };
+  const logout = () => {
+    setUserState({ isAuthenticated: false, user: null, reservations: [] });
+  };
+  const updateScore = score => {
+    setUserState({ score: score });
+  };
+
+  const value = {
+    userState,
+    login,
+    logout,
+    updateScore
+  };
+
+  return (
+    <UserContext.Provider value={value}>{props.children}</UserContext.Provider>
+  );
+}

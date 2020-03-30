@@ -1,0 +1,22 @@
+[
+  { "valueEN": "Good", "valueDE": "Gut" },
+  { "valueEN": "Car", "valueDE": " Das Auto" },
+  { "valueEN": "Chair", "valueDE": "Stuhl" },
+  { "valueEN": "Paper", "valueDE": "Papier" },
+  { "valueEN": "Couch", "valueDE": "Sofa" },
+  { "valueEN": "Rain", "valueDE": "Regen" },
+  { "valueEN": "Kitchen", "valueDE": "Küche" },
+  { "valueEN": "Fridge", "valueDE": "Kühlschrank" },
+  { "valueEN": "Table", "valueDE": "Tisch" },
+  { "valueEN": "Bad", "valueDE": "Schlecht" },
+  { "valueEN": "Slow", "valueDE": "Langsam" },
+  { "valueEN": "Fast", "valueDE": "Schnell" },
+  { "valueEN": "Jewelry", "valueDE": "Schmuck" },
+  { "valueEN": "Cup", "valueDE": "Tasse" },
+  { "valueEN": "Pen", "valueDE": "Stift" },
+  { "valueEN": "Happy", "valueDE": "Glücklich" },
+  { "valueEN": "Progress", "valueDE": "Fortschritt" },
+  { "valueEN": "Give", "valueDE": "Geben" },
+  { "valueEN": "It", "valueDE": "Es" },
+  { "valueEN": "Sunshine", "valueDE": "Sonnenschein" }
+]
