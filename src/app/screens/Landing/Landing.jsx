@@ -1,23 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router";
-import { Link as RouterLink } from "react-router-dom";
-import { Box, Typography, Button } from "@material-ui/core";
-import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import { Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LoginDialog from "../../components/LoginDialog/LoginDialog";
-// import { useUserContext } from "../../components/UserProvider/UserProvider";
-// import Background from "../../../assets/images/bg3.jpg";
-// import * as ROUTES from "../../appRoutes";
-
-const useStyles = makeStyles(theme => ({
-  heroWrapper: {
-    marginTop: 200
-  },
-  titleBreak: {
-    fontWeight: 900
-  },
-  link: { textDecoration: "none" }
-}));
 
 function Home(props) {
   const classes = useStyles();
@@ -40,4 +24,14 @@ function Home(props) {
   );
 }
 
-export default withRouter(Home);
+export default Home;
+
+const useStyles = makeStyles(theme => ({
+  heroWrapper: {
+    marginTop: 200
+  },
+  titleBreak: {
+    fontWeight: 900
+  },
+  link: { textDecoration: "none" }
+}));

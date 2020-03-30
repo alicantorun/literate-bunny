@@ -1,17 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router";
-import { Link as RouterLink } from "react-router-dom";
-import { Box, Typography, Button, Grid, Container } from "@material-ui/core";
+import { Box, Typography, Container } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-
 import { makeStyles } from "@material-ui/core/styles";
 import AddVocabulary from "../../components/AddVocabulary/AddVocabulary";
-import VocabularyList from "../../components/VocabularyList/VocabularyList";
 import {
   addVocabularyPair,
   selectDictionary
 } from "../../../store/ducks/dictionarySlice";
-import * as ROUTES from "../../appRoutes";
 import { useUserContext } from "../../components/UserProvider/UserProvider";
 
 function Home(props) {
@@ -47,7 +43,7 @@ function Home(props) {
             WORDS IN YOUR DICTIONARY
           </Box>
         </Typography>
-        <Typography variant="h4" color="textSecondary">
+        <Typography variant="h6" color="textSecondary">
           {userState.score === 0 ? (
             <Box textAlign="center" m={5}>
               TEST YOURSELF TO SEE YOUR SCORE HERE

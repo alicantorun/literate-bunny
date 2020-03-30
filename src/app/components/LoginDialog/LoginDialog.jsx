@@ -9,12 +9,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useUserContext } from "../UserProvider/UserProvider";
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../../appRoutes";
-import { makeStyles } from "@material-ui/core/styles";
 import EllipticButton from "../EllipticButton/EllipticButton";
 
 export default function FormDialog() {
   const history = useHistory();
-  const classes = useStyles();
   const { login } = useUserContext();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -76,13 +74,3 @@ export default function FormDialog() {
     </div>
   );
 }
-
-const useStyles = makeStyles(theme => ({
-  button: {
-    borderRadius: theme.spacing(3),
-    paddingLeft: theme.spacing(5),
-    paddingRight: theme.spacing(5),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
-  }
-}));

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Box, Typography, IconButton } from "@material-ui/core";
+import { TextField, IconButton } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 function AddVocabulary({ addPair }) {

@@ -1,4 +1,7 @@
 import React, { useContext, createContext, useReducer } from "react";
+import { useDispatch } from "react-redux";
+import { resetDictionary } from "../../../store/ducks/dictionarySlice";
+
 const UserContext = createContext();
 
 export function useUserContext() {
@@ -27,12 +30,14 @@ export default function UserProvider(props) {
     (state, newState) => ({ ...state, ...newState }),
     initialState
   );
+  const dispatch = useDispatch();
 
   const login = name => {
     setUserState({ isAuthenticated: true, user: name });
   };
   const logout = () => {
-    setUserState({ isAuthenticated: false, user: null, reservations: [] });
+    dispatch(resetDictionary());
+    setUserState({ isAuthenticated: false, user: null, score: 0 });
   };
   const updateScore = score => {
     setUserState({ score: score });

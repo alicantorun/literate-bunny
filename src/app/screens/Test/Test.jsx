@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import {
   Box,
   Typography,
-  Button,
-  Grid,
-  Container,
   FormControl,
   InputLabel,
   Select,
   MenuItem
 } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
-import { TextField, IconButton } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { TextField } from "@material-ui/core";
 import EllipticButton from "../../components/EllipticButton/EllipticButton";
 import { makeStyles } from "@material-ui/core/styles";
 import { useUserContext } from "../../components/UserProvider/UserProvider";
@@ -33,18 +30,21 @@ function Test(props) {
   const [score, setScore] = useState(0);
   const classes = useStyles();
   const dictionary = useSelector(selectDictionary);
-  const dispatch = useDispatch();
+
   const [reload, setReload] = useState(0);
   const { updateScore } = useUserContext();
 
+  const randomGenerator = useCallback(
+    n => {
+      const shuffled = [...dictionary].sort(() => 0.5 - Math.random());
+      setTestDictionary(shuffled.slice(0, n));
+    },
+    [dictionary]
+  );
+
   useEffect(() => {
     randomGenerator(20);
-  }, [reload]);
-
-  const randomGenerator = n => {
-    const shuffled = [...dictionary].sort(() => 0.5 - Math.random());
-    setTestDictionary(shuffled.slice(0, n));
-  };
+  }, [reload, randomGenerator]);
 
   const updateField = e => {
     setTestInput(e.target.value);
@@ -77,6 +77,16 @@ function Test(props) {
     setStartState(false);
   };
 
+  console.log(level);
+  console.log(testDictionary.length);
+  const setTest = () => {
+    if (!testLanguage || !level) {
+      return true;
+    }
+
+    if (level > testDictionary.length) return true;
+  };
+
   const onRestartTest = () => {
     setScoreState(false);
     setTestState(false);
@@ -97,6 +107,13 @@ function Test(props) {
     setLevel(e.target.value);
   };
 
+  const answerClassGenerator = (item, i) => {
+    return testDictionary[i][testLanguagePair[0]].toLowerCase() ===
+      item.toLowerCase()
+      ? classes.greenText
+      : classes.redText;
+  };
+
   const DisplayStart = () => {
     return (
       <Box
@@ -105,9 +122,9 @@ function Test(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="h3" color="textSecondary">
-          <Box textAlign="center" m={5}>
-            HERE YOU CAN TEST YOURSELF
+        <Typography variant="h2" color="textSecondary">
+          <Box textAlign="center" m={4}>
+            TEST <span className={classes.titleBreak}>YOURSELF</span>
           </Box>
         </Typography>
         <Box display="flex" alignItems="center" justifyContent="center">
@@ -128,8 +145,17 @@ function Test(props) {
           </FormControl>
         </Box>
         <Box marginTop={2}>
-          <EllipticButton text="Start Test" onClick={onStartTest} />
+          <EllipticButton
+            text="Start Test"
+            onClick={onStartTest}
+            disabled={setTest()}
+          />
         </Box>
+        <Typography variant="h6" color="textSecondary">
+          <Box textAlign="center" m={5}>
+            SELECT YOUR TEST LANGUAGE AND THE NUMBER OF LEVELS ABOVE
+          </Box>
+        </Typography>
       </Box>
     );
   };
@@ -176,7 +202,12 @@ function Test(props) {
 
   const DisplayScore = () => {
     return (
-      <>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
         <Typography variant="h2" color="textSecondary">
           <Box textAlign="center" m={1}>
             YOUR <span className={classes.titleBreak}>SCORE IS {score}</span>
@@ -185,23 +216,21 @@ function Test(props) {
         <ul>
           {userArr.map((item, i) => {
             return (
-              <li
-                key={i}
-                className={
-                  testDictionary[i][testLanguagePair[0]].toLowerCase() ===
-                  item.toLowerCase()
-                    ? classes.greenText
-                    : classes.redText
-                }
-              >
-                YOUR ANSWER: {item} - CORRECT ANSWER:{" "}
-                {testDictionary[i][testLanguagePair[1]]}
+              <li key={i}>
+                Your answer:{" "}
+                <span className={answerClassGenerator(item, i)}>{item}</span> -
+                Correct answer:
+                <span className={answerClassGenerator(item, i)}>
+                  {testDictionary[i][testLanguagePair[0]]}
+                </span>
               </li>
             );
           })}
         </ul>
-        <Button onClick={onRestartTest}>Restart Test</Button>
-      </>
+        <EllipticButton text="RESTART TEST" onClick={onRestartTest}>
+          Restart Test
+        </EllipticButton>
+      </Box>
     );
   };
 
@@ -225,10 +254,10 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 900
   },
   greenText: {
-    color: "green"
+    color: "ForestGreen"
   },
   redText: {
-    color: "red"
+    color: "FireBrick"
   },
   formControl: {
     width: 200

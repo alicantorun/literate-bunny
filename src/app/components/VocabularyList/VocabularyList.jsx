@@ -1,20 +1,8 @@
 import React, { useState } from "react";
-import {
-  TextField,
-  Box,
-  Typography,
-  Button,
-  Paper,
-  IconButton,
-  Grid,
-  Divider,
-  Container
-} from "@material-ui/core";
+import { Box, Typography, Grid, Container } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
-
 import VocabularyItem from "../VocabularyItem/VocabularyItem";
-
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeVocabularyPair,
@@ -92,20 +80,7 @@ function VocabularyList() {
 export default VocabularyList;
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 30
-  },
   word: {
     width: "45%"
-  },
-  titleBreak: {
-    fontWeight: 900
-  },
-  greenText: {
-    color: "green"
-  },
-  redText: {
-    color: "red"
   }
 }));

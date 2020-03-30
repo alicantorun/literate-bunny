@@ -9,15 +9,20 @@ export const slice = createSlice({
       const vocabularyPair = action.payload;
       state.unshift(vocabularyPair);
     },
-
     removeVocabularyPair: (state, action) => {
       const index = action.payload;
       state.splice(index, 1);
-    }
+    },
+    resetDictionary: state => [...DICTIONARY_DATA]
   }
 });
 
-export const { addVocabularyPair, removeVocabularyPair } = slice.actions;
+export const {
+  addVocabularyPair,
+  removeVocabularyPair,
+  resetDictionary
+} = slice.actions;
+
 export const selectDictionary = state => state.dictionary;
 
 export default slice.reducer;

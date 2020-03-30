@@ -1,14 +1,5 @@
-import React, { useState } from "react";
-import {
-  TextField,
-  Box,
-  Typography,
-  Button,
-  Paper,
-  IconButton,
-  Grid,
-  Divider
-} from "@material-ui/core";
+import React from "react";
+import { Box, Typography, IconButton, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -51,20 +42,7 @@ function VocabularyItem({ valuePair, index, removePair }) {
 export default VocabularyItem;
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 30
-  },
   word: {
     width: "45%"
-  },
-  titleBreak: {
-    fontWeight: 900
-  },
-  greenText: {
-    color: "green"
-  },
-  redText: {
-    color: "red"
   }
 }));

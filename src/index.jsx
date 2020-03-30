@@ -8,12 +8,12 @@ import { BrowserRouter } from "react-router-dom";
 import UserProvider from "./app/components/UserProvider/UserProvider";
 
 ReactDOM.render(
-  <UserProvider>
-    <Provider store={store}>
+  <Provider store={store}>
+    <UserProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Provider>
-  </UserProvider>,
+    </UserProvider>
+  </Provider>,
   document.getElementById("root")
 );
